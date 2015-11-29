@@ -22,3 +22,17 @@ unset($d);
 echo "<h3>Case of table variable</h3><hr>";
 echo "f = ".$f."<hr>";
 echo "e = ".$e."<hr>";
+
+//memory Leak
+$a = array("foo"=>"bar", 1 => 82);
+$a[] = &$a;
+unset($a);
+
+//Using function
+function foo(&$var){
+	$var = "bar";
+	return $var;
+}
+
+$a = "foobaz";
+$b = foo($a);
